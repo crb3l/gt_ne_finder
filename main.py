@@ -9,7 +9,6 @@ def find_pure_nash_equilibria(payoff_matrix_1, payoff_matrix_2):
 
     nash_equilibria = []
 
-
     for i in range(num_strategies_1):
         for j in range(num_strategies_2):
             best_response_1 = True
@@ -18,13 +17,11 @@ def find_pure_nash_equilibria(payoff_matrix_1, payoff_matrix_2):
                     best_response_1 = False
                     break
 
-
             best_response_2 = True
             for j_alt in range(num_strategies_2):
                 if payoff_matrix_2[i][j_alt] > payoff_matrix_2[i][j]:
                     best_response_2 = False
                     break
-
 
             if best_response_1 and best_response_2:
                 nash_equilibria.append((i, j))
@@ -33,10 +30,10 @@ def find_pure_nash_equilibria(payoff_matrix_1, payoff_matrix_2):
 
 
 def get_integer_input(prompt, positive_only=False):
-    while positive_only:
+    while True:
         try:
             value = int(input(prompt))
-            if value <= 0:
+            if positive_only and value <= 0:
                 print("Please enter a positive integer.")
                 continue
             return value
@@ -63,10 +60,8 @@ def main():
     num_strategies_1 = get_integer_input("Enter number of strategies for player 1: ", positive_only=True)
     num_strategies_2 = get_integer_input("Enter number of strategies for player 2: ", positive_only=True)
 
-
     payoff_matrix_1 = [[0 for _ in range(num_strategies_2)] for _ in range(num_strategies_1)]
     payoff_matrix_2 = [[0 for _ in range(num_strategies_2)] for _ in range(num_strategies_1)]
-
 
     generate_random = get_yes_no_input("Generate random payoffs? (yes/no): ")
 
@@ -84,7 +79,6 @@ def main():
                 print(f"\nStrategy profile: Player 1 uses strategy {i + 1}, Player 2 uses strategy {j + 1}")
                 payoff_matrix_1[i][j] = get_integer_input(f"Payoff for Player 1: ")
                 payoff_matrix_2[i][j] = get_integer_input(f"Payoff for Player 2: ")
-
 
     print("\nGame Payoff Matrices:")
     print("Player 1's payoffs:")
