@@ -1,0 +1,28 @@
+function FindPureNE(payoffMatrix1, payoffMatrix2):
+    nashE = empty list
+    numStrat1 = number of rows in payoffMatrix1
+    numStrat2 = number of columns in payoffMatrix1
+
+    for i from 0 to numStrat1-1:
+        for j from 0 to numStrat2-1:
+            # Check if strategy profile (i,j) is a Nash Equilibrium
+
+            # Check if player 1 has a better response
+            bestResponse1 = true
+            for i_alt from 0 to numStrat1-1:
+                if payoffMatrix1[i_alt][j] > payoffMatrix1[i][j]:
+                    bestResponse1 = false
+                    break
+
+            # Check if player 2 has a better response
+            bestResponse2 = true
+            for j_alt from 0 to numStrat2-1:
+                if payoffMatrix2[i][j_alt] > payoffMatrix2[i][j]:
+                    bestResponse2 = false
+                    break
+
+            # If neither player has a better response, it's a Nash Equilibrium
+            if bestResponse1 AND bestResponse2:
+                add (i,j) to nashE
+
+    return nashE
